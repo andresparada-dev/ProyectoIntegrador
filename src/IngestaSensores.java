@@ -12,7 +12,7 @@ public class IngestaSensores {
     public static void main(String[] args) {
 
         String linea =
-                "EST-001,2026-09-07 08:00,18.5,75.2,32.4";
+                "EST-011,2026-09-07 08:00,60.1,100.0,0.0";
 
         procesarLinea(linea);
     }
@@ -86,6 +86,27 @@ public class IngestaSensores {
         );
     }
 
+    public static double convertirANumero(
+            String texto) {
+
+        try {
+
+            return Double.parseDouble(texto);
+
+        } catch (NumberFormatException e) {
+
+            System.out.println(
+                    "Error: '" +
+                            texto +
+                            "' no es un número válido"
+            );
+
+            return Double.NaN;
+        }
+    }
+
+
+
 
     public static void validarYProcesarLectura(
             LecturaSensor lectura) {
@@ -101,6 +122,12 @@ public class IngestaSensores {
         }
 
         aceptarLectura(lectura);
+    }
+
+    public static boolean esLecturaValida(
+            LecturaSensor lectura) {
+
+        return obtenerMotivoInvalidez(lectura) == null;
     }
 
 
